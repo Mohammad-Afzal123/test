@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+{% load static wagtailimages_tags %}
+
+{% block content %}
+<style>
+  body {
+    background-color: #4B0082;
+    margin: 0;
+    font-family: sans-serif;
+  }
+
+  .content-and-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-start;
+    padding: 20px;
+    flex-wrap: wrap;
+  }
+
+  .left-content {
+    flex: 1;
+    margin-right: 20px;
+    color: white;
+    text-align: center; /* Center the text within left-content */
+  }
+
+  .left-content h1 {
+    font-size: 2em;
+    margin-bottom: 10px;
+  }
+
+  .right-box {
+    width: 300px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: none;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .right-box h2 {
+    color: #4B0082;
+    font-size: 2em;
+  }
+
+  .image-grid {
+    display: flex;
+    flex-direction: column; /* Stack images vertically */
+    width: 75%; /* Adjust width as needed */
+    margin: 20px auto; /* Center the image grid */
+    gap: 20px;
+  }
+
+  .image-container {
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .hero-image {
+    max-width: 45%;
+    height: auto;
+    display: block;
+    border-radius: 10px;
+    margin-right: 15px;
+  }
+
+  .image-description {
+    color: white;
+    text-align: left;
+    flex: 1;
+    max-width: 80%; /* Text will wrap at 80% of the container width */
+    word-break: break-word;  /* Allows breaking words at any point */
+    overflow-wrap: break-word; /* For compatibility with older browsers */
+}
+
+
+  /* ... other styles and media queries ... */
+  @media (max-width: 768px) {
+    .image-grid {
+      width: 90%; /* Adjust for smaller screens if needed */
+    }
+    .image-container {
+      flex-direction: column; /* Vertically stack on mobile */
+      align-items: center;
+    }
+    .hero-image {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+    .image-description {
+      text-align: center;
+    }
+
+  }
+</style>
+
+<div class="content-and-box">
+  <div class="left-content">  
+    <h1>{{ page.title }}</h1>
+    <p class="centered-content">{{ page.description }}</p>
+  </div>
+  <div class="right-box">
+    <h2>Dr. R.Suganya</h2>
+  </div>
+</div>
+
+
+<div class="image-grid">
+  {% if page.service_image1 %}
+    <div class="image-container">
+        {% image page.service_image1 width-400 class="hero-image" alt="Image 1" %}
+        <p class="image-description">{{page.description1}}</p> 
+    </div>
+  {% endif %}
+
+  {% if page.service_image2 %}
+    <div class="image-container">
+        {% image page.service_image2 width-400 class="hero-image" alt="Image 2" %}
+        <p class="image-description">{{ page.description2 }}</p>
+    </div>
+  {% endif %}
+
+  {% if page.service_image3 %}
+    <div class="image-container">
+        {% image page.service_image3 width-400 class="hero-image" alt="Image 3" %}
+        <p class="image-description">{{ page.description3 }}</p>
+    </div>
+  {% endif %}
+</div>
+
+{% endblock %}
+

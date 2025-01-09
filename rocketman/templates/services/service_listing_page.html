@@ -1,0 +1,371 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{%load wagtailimages_tags %}
+{% block content %}
+<html>
+  <head>
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+    <style>
+      body {
+        font-family: sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #490293; /* Light gray background */
+      }
+      
+      .header {
+        text-align: center;
+        padding: 100px 0; /* Increased top padding */
+        background-color: #e9ecef;
+        border-bottom: 1px solid #dee2e6;
+    }
+      h2{
+        color:#fff;
+        font-size:2em;
+        margin-bottom:0.2em;
+        text-align:left;
+      }
+      
+      h1 {
+        font-size: 4em;
+        margin-bottom: 0.2em;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); /* Softer shadow */
+        background: linear-gradient(to bottom right, #007bff, #0056b3); /* Blue gradient */
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent; /* Make text transparent for gradient */
+        color: #007bff; /* Fallback color if gradient isn't supported */
+      }
+      
+      .wer {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        padding: 20px;
+      }
+      
+      .card {
+        width: 45%;
+        margin: 0px;
+        border: none; /* Remove border */
+        border-radius: 8px; /* Slightly rounded corners */
+        overflow: hidden;
+        display: flex;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        transition: transform 0.3s ease;
+        background-color: #fff; /* White card background */
+        flex: 1 0 calc(45% - 1em); /* Adjust card width as needed */
+        box-sizing: border-box;
+      }
+      
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0,0,0,0.15); /* More pronounced shadow on hover */
+      }
+      
+      .card-content {
+        padding: 20px; /* Increased padding */
+        flex: 1;
+      }
+      
+      .card img {
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        margin-left: auto;
+        border-radius: 0 8px 8px 0; /* Round image corners on the right */
+      }
+      
+      /* Media query for smaller screens */
+      @media (max-width: 768px) {
+        .card {
+          width: 100%;
+        }
+      }
+      
+      a {  /* Style links */
+        color: #007bff;
+        text-decoration: none;
+      }
+      
+      a:hover {
+        text-decoration: underline;
+      }
+      
+      p {
+        color: #495057; /* Darker gray for text */
+      }
+      .site-footer {
+        background-color: #000;
+        color: #fff;
+        padding: 40px 0;
+        width: 100%;
+        box-sizing: border-box;
+      }
+      
+      .footer-content {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        max-width: 1200px;
+        margin: 0 auto;
+        width: 100%;
+      }
+      
+      .footer-section {
+        flex-basis: calc(25% - 20px);
+        margin: 10px;
+        box-sizing: border-box;
+      }
+      
+      .footer-section h3 {
+        color: #95afc0;
+        margin-bottom: 15px; /* Increased margin */
+      }
+      
+      
+      .footer-section p {
+        line-height: 1.6; /* Increased line height */
+        color: #bdc3c7;
+      }
+      .footer-section.contact p {  /* Style contact info */
+        display: flex;
+        align-items: center; /* Align icon and text */
+        color: #ccc;
+      }
+      .footer-section.contact .uil {
+      margin-right: 10px; /* Space between icon and text */
+      font-size: 1.2em;
+      }
+      .footer-section ul {
+        list-style: none;
+        padding: 0;
+      }
+      
+      .footer-section li {
+        margin-bottom: 8px;  /* Increased margin */
+      }
+      
+      .footer-section a {
+        color: #bdc3c7;
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+      
+      .footer-section a:hover {
+        color: #95afc0;
+      }
+      
+      .social-icons a {
+        display: inline-block;
+        margin: 0 10px;
+        font-size: 24px; /* Larger icon size */
+        color: #bdc3c7;
+        transition: color 0.3s;
+      }
+      
+      .social-icons a:hover {
+        color: #dcdde1;
+      }
+      .footer-section.publications { /* Full width for publications */
+        flex-basis: 100%;
+        margin-bottom: 30px;
+        text-align: center;
+      }
+      
+      .footer-publications-list {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .footer-publications-list li {
+        margin: 5px 10px;  /* Adjusted margins */
+      }
+      
+      .footer-publications-list a {
+        color: #bdc3c7;
+        text-decoration: none;
+        transition: color 0.3s;
+        font-weight: 500;
+        border-bottom: 2px solid transparent; /* Underline on hover */
+        padding-bottom: 2px; /* Space for underline */
+      }
+      
+      
+      .footer-publications-list a:hover {
+        color: #95afc0;
+        border-color: #95afc0;
+      }
+      
+      
+      .footer-bottom { /* Styles for copyright section */
+      text-align: center;
+      padding-top: 20px;
+      border-top: 1px solid #333; /* Separator line */
+      color: #888; /* Lighter text color */
+      font-size: 0.9em; /* Smaller font size */
+      margin-bottom: 0; /* Remove margin */
+      }
+      
+      @media (max-width: 768px) {
+        .footer-section {
+            flex-basis: calc(50% - 20px);
+        }
+      }
+      
+      
+      @media (max-width: 500px) {
+        .footer-section {
+            flex-basis: 100%;
+            margin: 10px 0;
+        }
+      }
+      /* Other styles... */
+      .category-header {
+        margin-bottom: 0.2em;
+        text-align: left;       /* Align text to the left */
+        width: 100%;           /* Make it span the full width */
+    }
+    
+    .category-header h2 {  /* And for the h2 inside the header */
+      text-align: left; 
+      width:100%;         /* Full width */
+      margin:0;         /* remove default margins*/
+  }
+    
+  .category-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2em; /* Or whatever gap you prefer */
+    justify-content: center; /* Center-align items horizontally */
+}
+    .card-content h3 { /* Targets the h3 within .card-content */
+      text-align: left; 
+    }
+    
+    
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) { /* Or whatever breakpoint you need */
+      .card {
+          flex-basis: 100%; /* Take full width on small screens */
+          margin: 0;           /* Remove margins if needed for centering */
+  
+      }
+  }
+    
+
+
+    
+    
+    </style>
+  </head>
+  <body>
+    <nav class='abc' id="nav">
+      <div class="nav-name">
+        <p>Dr. R.Suganya</p>
+      </div>
+      <div class="nav-menu" id="myNavMenu">
+        <ul class="nav_menu_list">
+          <li class="nav_list">
+            <a href="http://127.0.0.1:8000" class="nav-link ">Home</a>
+          </li>
+          <li class="nav_list">
+            <a href="{{page.slug}}" class="nav-link active-link">Books & Journals</a>
+          </li>
+          <li class="nav_list">
+            <a href="http://127.0.0.1:8000/servicetime" class="nav-link ">Events & Conferences</a>
+          </li>
+          <li class="nav_list">
+            <a href="http://127.0.0.1:8000/great-time/" class="nav-link ">Projects & Achievements</a>
+          </li>
+        </ul>
+      </div>
+      <div class="nav-menu-btn">
+        <i class="uil uil-bars" onclick="myMenuFunction()"></i>
+      </div>
+    </nav>
+  
+    <div class="header">
+      <h1>Books &amp; Journals</h1>
+    </div>
+  
+    <div class="wer">
+      {% for category, services_in_category in services_by_category.items %}
+          {% if category %} 
+              <div class="category-header">
+                <hr>
+                  <h2>{{ category }}</h2>
+                  
+              </div>
+              <div class="category-cards">  {# Keep this wrapper #}
+                  {% for service in services_in_category %}
+                      <div class="card">  {# Card div remains #}
+                          <div class="card-content">
+                              <h3>{{ service.title }}</h3>
+                              <p>{{ service.description }}</p>
+                              {% if service.external_page%}  
+                              <a href="{{ service.external_page }}">Learn More</a>
+                              {% endif %}
+                              {% if service.internal_page%}
+                              <a href="{{service.slug}}">Learn More</a>
+                              {% endif %}
+                          </div>
+                          {% if service.service_image %}
+                              {% image service.service_image width-150 class="card-img" alt=service.title %}
+                          {% endif %}
+                      </div>
+                  {% endfor %}
+               </div> 
+          {% endif %}
+      {% endfor %}
+  </div>
+  
+  
+  
+  
+  </body>
+  <footer class="site-footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-section about">
+                <h3>About Me</h3>
+                <p>Associate Professor at VIT Chennai with 18 years of expertise in computer science, specializing in Medical Imaging, Artificial Intelligence, Natural Language Processing, and Big Data Technologies. </p>
+            </div>
+            <div class="footer-section quick-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="">Home</a></li>
+                    <li><a href="http://127.0.0.1:8000/services/">Books & Journals</a></li>
+                    <li><a href="http://127.0.0.1:8000/servicetime">Events & Conferences</a></li>
+                    <li><a href="http://127.0.0.1:8000/great-time/">Projects & Achievements</a></li>
+                </ul>
+            </div>
+            <div class="footer-section contact">
+                <h3>Contact</h3>
+                <p><i class="uil uil-envelope"></i> suganya.ramamoorthy@vit.ac.in</p> </div>
+            <div class="footer-section social">
+                <h3>Social</h3>
+                <div class="social-icons">
+                    <a href="https://www.linkedin.com/in/suganya-ramamoorthy-19897344/" target="_blank"><i class="uil uil-linkedin"></i></a>
+                    <a href="https://github.com/suganyar-ai" target="_blank"><i class="uil uil-github-alt"></i></a>
+                   <a href="https://www.instagram.com/__suganya_r__/" target="_blank"><i class="uil uil-instagram"></i></a> </div>
+            </div>
+            <div class="footer-section publications">
+                <h3>Selected Publications</h3>
+                <ul class="footer-publications-list">
+                    <li><a href="https://www.scopus.com/authid/detail.uri?authorId=56805014700" target="_blank">SCOPUS</a></li>
+                    <li><a href="https://scholar.google.com/citations?user=0000-0003-1874-6479" target="_blank">Google Scholar</a></li>
+                    <li><a href="https://publons.com/a/1648621" target="_blank">Publons</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Dr. R. Suganya. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+</html>
+{% endblock %}
