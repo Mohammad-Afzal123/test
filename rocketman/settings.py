@@ -16,7 +16,8 @@ CSRF_TRUSTED_ORIGINS = [
 ALLOWED_HOSTS = [
     "64.227.150.192",
     "suganyaramamoorthy.com",
-    "www.suganyaramamoorthy.com"
+    "www.suganyaramamoorthy.com",
+    "64.227.150.192:8000"
 ]
 
 DATABASES = {
